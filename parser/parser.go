@@ -30,12 +30,12 @@ func (p *Parser) Errors() []string {
 
 func (p *Parser) ParseProgram() *ast.Program {
 	program := &ast.Program{}
-	program.Statments = []ast.Statement{}
+	program.Statements = []ast.Statement{}
 
 	for !p.curTokenIs(token.EOF) {
-		stmt := p.parseStatment()
+		stmt := p.parseStatement()
 		if stmt != nil {
-			program.Statments = append(program.Statments, stmt)
+			program.Statements = append(program.Statements, stmt)
 		}
 
 		p.nextToken()
@@ -49,16 +49,18 @@ func (p *Parser) nextToken() {
 	p.peekToken = p.l.NextToken()
 }
 
-func (p *Parser) parseStatment() ast.Statement {
+func (p *Parser) parseStatement() ast.Statement {
 	switch p.curToken.Type {
 	case token.LET:
-		return p.parseLetStatment()
+		return p.parseLetStatement()
+	case token.RETURN:
+		return p.parseReturnStatement()
 	default:
 		return nil
 	}
 }
 
-func (p *Parser) parseLetStatment() *ast.LetStatement {
+func (p *Parser) parseLetStatement() *ast.LetStatement {
 	stmt := &ast.LetStatement{Token: p.curToken}
 
 	if !p.expectPeek(token.IDENT) {
@@ -72,6 +74,17 @@ func (p *Parser) parseLetStatment() *ast.LetStatement {
 	}
 
 	// TODO: We're skipping the expressions until we encounter a semicolon
+	for !p.curTokenIs(token.SEMICOLON) {
+		p.nextToken()
+	}
+
+	return stmt
+}
+
+func (p *Parser) parseReturnStatement() ast.Statement {
+	stmt := &ast.ReturnStatement{Token: p.curToken}
+
+	// TODO: skipping expressions until we encounter a semicolon
 	for !p.curTokenIs(token.SEMICOLON) {
 		p.nextToken()
 	}
