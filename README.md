@@ -4,4 +4,4 @@ An intrepreter for the monkey programing language written in Go.
 
 ## Status
 
-3.5 : p 111 Evaluating Expressions
+3.5 : p 115 Evaluating Boolean Literals
