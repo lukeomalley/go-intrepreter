@@ -154,7 +154,6 @@ func evalIfExpression(ie *ast.IfExpression) object.Object {
 	} else if ie.Alternative != nil {
 		return Eval(ie.Alternative)
 	} else {
-		fmt.Print("WE HERE")
 		return NULL
 	}
 }

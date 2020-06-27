@@ -1,6 +1,7 @@
 package evaluator
 
 import (
+	"fmt"
 	"intrepreter/lexer"
 	"intrepreter/object"
 	"intrepreter/parser"
@@ -148,7 +149,7 @@ func TestErrorHandling(t *testing.T) {
 		{"-true;", "unknown operator: -BOOLEAN"},
 		{"true + false;", "unknown operator: BOOLEAN + BOOLEAN"},
 		{"5; true + false; 5", "unknown operator: BOOLEAN + BOOLEAN"},
-		{"if (10 < 1) { true + false }", "unknown operator: BOOLEAN + BOOLEAN"},
+		{"if (10 > 1) { true + false }", "unknown operator: BOOLEAN + BOOLEAN"},
 		{`
 		if (10 > 1) {
 			if (10 > 1) {
@@ -164,6 +165,7 @@ func TestErrorHandling(t *testing.T) {
 		evaluated := testEval(tt.input)
 		errObj, ok := evaluated.(*object.Error)
 		if !ok {
+			fmt.Printf(tt.input)
 			t.Errorf("no error object returned. got=%T(%+v)", evaluated, evaluated)
 			continue
 		}
