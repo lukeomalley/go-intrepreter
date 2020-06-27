@@ -24,4 +24,4 @@ Currently the project only supports input from the command line repl.
 
 ## 🛰 Status
 
-3.7 : p 128 Return Statements
+3.9 : p 128 Bindings & the Envirionment
