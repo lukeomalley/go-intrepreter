@@ -131,6 +131,25 @@ func TestReturnStatements(t *testing.T) {
 			 return 1; 
     }
 		`, 10},
+		{
+			`
+let f = fn(x) {
+  return x;
+  x + 10;
+};
+f(10);`,
+			10,
+		},
+		{
+			`
+let f = fn(x) {
+   let result = x + 10;
+   return result;
+   return 10;
+};
+f(10);`,
+			20,
+		},
 	}
 
 	for _, tt := range tests {
@@ -224,9 +243,9 @@ func TestFunctionApplication(t *testing.T) {
 	}{
 		{"let identity = fn(x) { x; }; identity(5);", 5},
 		{"let identity = fn(x) { return x; }; identity(5);", 5},
-		{"let double = fn(x) { return x * 2; }; double(5);", 10},
-		{"let add = fn(x, y) { return x + y; }; add(5, 5);", 10},
-		{"let add = fn(x, y) { return x + y; }; add(5 + 5, add(5 + 5));", 20},
+		{"let double = fn(x) { x * 2; }; double(5);", 10},
+		{"let add = fn(x, y) { x + y; }; add(5, 5);", 10},
+		{"let add = fn(x, y) { x + y; }; add(5 + 5, add(5, 5));", 20},
 		{"fn(x) { x; }(5)", 5},
 	}
 
