@@ -1,4 +1,4 @@
-# Go Intrepreter
+# Monkey Lang
 
 An intrepreter for the monkey programing language written in Go.
 
@@ -12,6 +12,20 @@ Currently the project only supports input from the command line repl.
 
 3. Start the interactive REPL: `go run main.go`
 
+## Sample Mokney Code
+
+Nth Fibonacci Number:
+
+```
+let fib = fn(n) {
+  if (n < 1) {
+    return n;
+  }
+
+  return fib(n - 1) + fib (n - 2);
+};
+```
+
 ## 🛠 How it Works
 
 ### Lexing
@@ -24,4 +38,4 @@ Currently the project only supports input from the command line repl.
 
 ## 🛰 Status
 
-3.10 : p 142 Functions & Function Calls
+4.2 : p 154 Strings
