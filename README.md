@@ -12,7 +12,7 @@ Currently the project only supports input from the command line repl.
 
 3. Start the interactive REPL: `go run main.go`
 
-## Sample Mokney Code
+## ✍️ Sample Mokney Code
 
 Nth Fibonacci Number:
 
@@ -24,6 +24,18 @@ let fib = fn(n) {
 
   return fib(n - 1) + fib (n - 2);
 };
+```
+
+Closures:
+
+```
+let newAdder = fn(x) {
+  fn(y) { x + y };
+};
+
+let addTwo = newAdder(2);
+
+addTwo(2); // => 4
 ```
 
 ## 🛠 How it Works
