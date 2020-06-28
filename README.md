@@ -14,16 +14,20 @@ Currently the project only supports input from the command line repl.
 
 ## ✍️ Sample Mokney Code
 
-Nth Fibonacci Number:
+Declare a Variable:
 
 ```
-let fib = fn(n) {
-  if (n < 1) {
-    return n;
-  }
+let x = 5;
+```
 
-  return fib(n - 1) + fib (n - 2);
-};
+Define and Apply a Function:
+
+```
+let add = fn(x, y) {
+  return x + y;
+}
+
+add(5, 5); // => 10
 ```
 
 Closures:
@@ -36,6 +40,18 @@ let newAdder = fn(x) {
 let addTwo = newAdder(2);
 
 addTwo(2); // => 4
+```
+
+Nth Fibonacci Number:
+
+```
+let fib = fn(n) {
+  if (n < 1) {
+    return n;
+  }
+
+  return fib(n - 1) + fib (n - 2);
+};
 ```
 
 ## 🛠 How it Works
