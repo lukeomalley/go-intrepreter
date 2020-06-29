@@ -43,6 +43,9 @@ const (
 	IF       = "IF"
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
+
+	// Data Types
+	STRING = "STRING"
 )
 
 var keywords = map[string]TokenType{
