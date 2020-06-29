@@ -68,4 +68,4 @@ let fib = fn(n) {
 
 ## 🛰 Status
 
-4.2 : p 154 Strings
+4.4 : p 166 Arrays
