@@ -1,6 +1,6 @@
 # 🐒 Monkey Lang
 
-Monkey Lang is a "toy" programming language built to help understand how an intrepreted language works under the hood. The intrepreter currently supports functions, higher-order functions, closures and integers and arithmetic.
+Monkey Lang is a "toy" programming language built to help understand how an intrepreted language works under the hood. The intrepreter currently supports functions, higher-order functions, closures, strings, integers, and integer arithmetic.
 
 This was written with the help of [Writing an Intrepreter in Go](https://interpreterbook.com/) by Thorsten Ball.
 
@@ -52,7 +52,7 @@ let fib = fn(n) {
     return n;
   }
 
-  return fib(n - 1) + fib (n - 2);
+  return fib(n - 1) + fib(n - 2);
 };
 ```
 
