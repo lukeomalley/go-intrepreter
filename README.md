@@ -68,4 +68,4 @@ let fib = fn(n) {
 
 ## 🛰 Status
 
-4.4 : p 166 Arrays
+4.4 : p 172 Arrays - TestOperatorPrecedenceParsing
