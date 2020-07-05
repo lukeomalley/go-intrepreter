@@ -18,6 +18,7 @@ const (
 	FUNCTION_OBJ     = "FUNCTION"
 	STRING_OBJ       = "STRING"
 	BUILTIN_OBJ      = "BUILTIN"
+	ARRAY_OBJ        = "ARRAY"
 )
 
 type Object interface {
@@ -25,7 +26,10 @@ type Object interface {
 	Inspect() string
 }
 
-// Integer object type used to represent primative 64 bit integer values
+// ============================================================================
+// Integer Object
+// ============================================================================
+
 type Integer struct {
 	Value int64
 }
@@ -35,6 +39,10 @@ func (i *Integer) Inspect() string {
 	return fmt.Sprintf("%d", i.Value)
 }
 
+// ============================================================================
+// String Object
+// ============================================================================
+
 type String struct {
 	Value string
 }
@@ -42,7 +50,10 @@ type String struct {
 func (s *String) Type() ObjectType { return STRING_OBJ }
 func (s *String) Inspect() string  { return s.Value }
 
-// Boolean object type used to represent primative boolean values
+// ============================================================================
+// Boolean Object
+// ============================================================================
+
 type Boolean struct {
 	Value bool
 }
@@ -52,13 +63,20 @@ func (b *Boolean) Inspect() string {
 	return fmt.Sprintf("%t", b.Value)
 }
 
-// Null object type used to represent the absence of a value 🧨💥
+// ============================================================================
+// Null Object
+// Used to represent the absence of a value 🧨💥
+// Billion dollar mistake: (https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/)
+// ============================================================================
 type Null struct{}
 
 func (n *Null) Type() ObjectType { return NULL_OBJ }
 func (b *Null) Inspect() string  { return "null" }
 
-// Return value object used to represent return values from functions
+// ============================================================================
+// Return Object
+// ============================================================================
+
 type ReturnValue struct {
 	Value Object
 }
@@ -66,8 +84,11 @@ type ReturnValue struct {
 func (rv *ReturnValue) Type() ObjectType { return RETURN_VALUE_OBJ }
 func (rv *ReturnValue) Inspect() string  { return rv.Value.Inspect() }
 
-// Error object type used to represent intrepretor errors
+// ============================================================================
+// Error Object
 // In production ready intrepreter you would add the stack trace and line numbers here
+// ============================================================================
+
 type Error struct {
 	Message string
 }
@@ -75,7 +96,10 @@ type Error struct {
 func (e *Error) Type() ObjectType { return ERROR_OBJ }
 func (e *Error) Inspect() string  { return "Error: " + e.Message }
 
-// Function object type to represent funtcions
+// ============================================================================
+// Function Object
+// ============================================================================
+
 type Function struct {
 	Parameters []*ast.Identifier
 	Body       *ast.BlockStatement
@@ -100,6 +124,10 @@ func (f *Function) Inspect() string {
 	return out.String()
 }
 
+// ============================================================================
+// Builtin Function Object
+// ============================================================================
+
 type BuiltinFunction func(args ...Object) Object
 
 type Builtin struct {
@@ -108,3 +136,27 @@ type Builtin struct {
 
 func (b *Builtin) Type() ObjectType { return BUILTIN_OBJ }
 func (b *Builtin) Inspect() string  { return "builtin function" }
+
+// ============================================================================
+// Array Object
+// ============================================================================
+
+type Array struct {
+	Elements []Object
+}
+
+func (ao *Array) Type() ObjectType { return ARRAY_OBJ }
+func (ao *Array) Inspect() string {
+	var out bytes.Buffer
+
+	elements := []string{}
+	for _, e := range ao.Elements {
+		elements = append(elements, e.Inspect())
+	}
+
+	out.WriteString("[")
+	out.WriteString(strings.Join(elenemts, ", ")
+	out.WriteString("]")
+
+	return out.String()
+}
