@@ -155,7 +155,7 @@ func (ao *Array) Inspect() string {
 	}
 
 	out.WriteString("[")
-	out.WriteString(strings.Join(elenemts, ", ")
+	out.WriteString(strings.Join(elements, ", "))
 	out.WriteString("]")
 
 	return out.String()
