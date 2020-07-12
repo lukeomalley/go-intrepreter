@@ -56,6 +56,38 @@ let fib = fn(n) {
 };
 ```
 
+Array Map Function
+
+```js
+let map = fn(arr, f) {
+  let iter = fn(arr, accumulated) {
+    if (len(arr) == 0) {
+      accumulated
+    } else {
+      iter(rest(arr), push(accumulated, f(first(arr))));
+    }
+  };
+
+  return iter(arr, []);
+};
+```
+
+Array Reduce Function
+
+```js
+let reduce = fn(arr, initial, f) {
+  let iter = fn(arr, result) {
+    if (len(arr) == 0) {
+      result
+    } else {
+      iter(rest(arr), f(result, first(arr)));
+    }
+  };
+
+  iter(arr, initial);
+};
+```
+
 ## 🛠 How it Works
 
 ### Lexing
