@@ -699,7 +699,7 @@ func TestParsingHashLiteralsStringKeys(t *testing.T) {
 	}
 }
 
-func testParsingHashLiteralsBooleanKeys(t *testing.T) {
+func TestParsingHashLiteralsBooleanKeys(t *testing.T) {
 	input := `{true: 1, false: 2}`
 
 	l := lexer.New(input)
@@ -734,7 +734,7 @@ func testParsingHashLiteralsBooleanKeys(t *testing.T) {
 	}
 }
 
-func testParsingHashLiteralsIntegerKeys(t *testing.T) {
+func TestParsingHashLiteralsIntegerKeys(t *testing.T) {
 	input := `{1: 1, 2: 2, 3: 3}`
 
 	l := lexer.New(input)

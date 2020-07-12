@@ -414,7 +414,7 @@ func TestHashLiterals(t *testing.T) {
 	}
 }
 
-func testHashIndexExpressions(t *testing.T) {
+func TestHashIndexExpressions(t *testing.T) {
 	tests := []struct {
 		input    string
 		expected interface{}
