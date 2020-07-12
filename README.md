@@ -68,4 +68,4 @@ let fib = fn(n) {
 
 ## 🛰 Status
 
-4.4 : p 172 Arrays - TestOperatorPrecedenceParsing
+4.4 : p 179 - Adding Builtin Functions for Arrays
