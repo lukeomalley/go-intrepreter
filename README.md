@@ -100,4 +100,4 @@ let reduce = fn(arr, initial, f) {
 
 ## 🛰 Status
 
-4.4 : p 179 - Adding Builtin Functions for Arrays
+4.5: p 184 - Hashes (Lexing Hash Literals)
