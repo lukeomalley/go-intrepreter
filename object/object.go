@@ -4,8 +4,9 @@ import (
 	"bytes"
 	"fmt"
 	"hash/fnv"
-	"intrepreter/ast"
 	"strings"
+
+	"github.com/lukeomalley/intrepreter/ast"
 )
 
 type ObjectType string

@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"intrepreter/repl"
 	"os"
 	"os/user"
+
+	"github.com/lukeomalley/intrepreter/repl"
 )
 
 func main() {

@@ -2,8 +2,9 @@ package ast
 
 import (
 	"bytes"
-	"intrepreter/token"
 	"strings"
+
+	"github.com/lukeomalley/intrepreter/token"
 )
 
 type Program struct {

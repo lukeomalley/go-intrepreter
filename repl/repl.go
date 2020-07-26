@@ -3,11 +3,12 @@ package repl
 import (
 	"bufio"
 	"fmt"
-	"intrepreter/evaluator"
-	"intrepreter/lexer"
-	"intrepreter/object"
-	"intrepreter/parser"
 	"io"
+
+	"github.com/lukeomalley/intrepreter/evaluator"
+	"github.com/lukeomalley/intrepreter/lexer"
+	"github.com/lukeomalley/intrepreter/object"
+	"github.com/lukeomalley/intrepreter/parser"
 )
 
 const PROMPT = "👉 "
