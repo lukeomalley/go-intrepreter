@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/lukeomalley/monkey-intrepreter/evaluator"
-	"github.com/lukeomalley/monkey-intrepreter/lexer"
-	"github.com/lukeomalley/monkey-intrepreter/object"
-	"github.com/lukeomalley/monkey-intrepreter/parser"
+	"github.com/lukeomalley/monkey-interpreter/evaluator"
+	"github.com/lukeomalley/monkey-interpreter/lexer"
+	"github.com/lukeomalley/monkey-interpreter/object"
+	"github.com/lukeomalley/monkey-interpreter/parser"
 )
 
 const PROMPT = "👉 "

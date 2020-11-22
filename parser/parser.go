@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/lukeomalley/monkey-intrepreter/ast"
-	"github.com/lukeomalley/monkey-intrepreter/lexer"
-	"github.com/lukeomalley/monkey-intrepreter/token"
+	"github.com/lukeomalley/monkey-interpreter/ast"
+	"github.com/lukeomalley/monkey-interpreter/lexer"
+	"github.com/lukeomalley/monkey-interpreter/token"
 )
 
 const (
