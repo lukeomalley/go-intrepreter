@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"strings"
 
-	"github.com/lukeomalley/monkey-interpreter/token"
+	"github.com/lukeomalley/monkey_interpreter/token"
 )
 
 type Program struct {
