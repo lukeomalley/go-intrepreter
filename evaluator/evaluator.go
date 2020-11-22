@@ -3,8 +3,8 @@ package evaluator
 import (
 	"fmt"
 
-	"github.com/lukeomalley/intrepreter/ast"
-	"github.com/lukeomalley/intrepreter/object"
+	"github.com/lukeomalley/mokney-intrepreter/ast"
+	"github.com/lukeomalley/mokney-intrepreter/object"
 )
 
 var (

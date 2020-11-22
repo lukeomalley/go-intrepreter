@@ -3,7 +3,7 @@ package evaluator
 import (
 	"fmt"
 
-	"github.com/lukeomalley/intrepreter/object"
+	"github.com/lukeomalley/monkey-intrepreter/object"
 )
 
 var builtins = map[string]*object.Builtin{

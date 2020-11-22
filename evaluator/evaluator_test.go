@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/lukeomalley/intrepreter/lexer"
-	"github.com/lukeomalley/intrepreter/object"
-	"github.com/lukeomalley/intrepreter/parser"
+	"github.com/lukeomalley/monkey-intrepreter/lexer"
+	"github.com/lukeomalley/monkey-intrepreter/object"
+	"github.com/lukeomalley/monkey-intrepreter/parser"
 )
 
 func TestEvalIntegerExpression(t *testing.T) {
