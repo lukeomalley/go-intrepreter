@@ -3,8 +3,8 @@ package evaluator
 import (
 	"fmt"
 
-	"github.com/lukeomalley/monkey_interpreter/ast"
-	"github.com/lukeomalley/monkey_interpreter/object"
+	"github.com/lukeomalley/monkey_lang/ast"
+	"github.com/lukeomalley/monkey_lang/object"
 )
 
 var (
