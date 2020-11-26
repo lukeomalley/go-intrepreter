@@ -92,6 +92,7 @@ func ReadUint16(ins Instructions) uint16 {
 
 func (ins Instructions) String() string {
 	var out bytes.Buffer
+
 	i := 0
 	for i < len(ins) {
 		def, err := Lookup(ins[i])
@@ -119,7 +120,7 @@ func (ins Instructions) fmtInstruction(def *Definition, operands []int) string {
 
 	switch operandCount {
 	case 1:
-		return fmt.Sprintf("%s %d", def.Name, def.OperandWidths)
+		return fmt.Sprintf("%s %d", def.Name, operands[0])
 	}
 
 	return fmt.Sprintf("Error: unhandled operand count for %s\n", def.Name)
