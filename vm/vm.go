@@ -8,6 +8,12 @@ import (
 	"github.com/lukeomalley/monkey_lang/object"
 )
 
+// True is the global true value used throughout the vm
+var True = &object.Boolean{Value: true}
+
+// False is the global false value used throughout the vm
+var False = &object.Boolean{Value: false}
+
 // StackSize sets the maximum size of the stack
 const StackSize = 2048
 
@@ -55,7 +61,18 @@ func (vm *VM) Run() error {
 		case code.OpPop:
 			vm.pop()
 
-		case code.OpTrue, code.OpFalse:
+		case code.OpTrue:
+			err := vm.push(True)
+			if err != nil {
+				return err
+			}
+
+		case code.OpFalse:
+			err := vm.push(False)
+			if err != nil {
+				return err
+			}
+
 		}
 
 	}
