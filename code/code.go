@@ -15,6 +15,7 @@ type Opcode byte
 const (
 	OpConstant = iota
 	OpAdd
+	OpPop
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -26,6 +27,7 @@ type Definition struct {
 var definitions = map[Opcode]*Definition{
 	OpConstant: {"OpConstant", []int{2}},
 	OpAdd:      {"OpAdd", []int{}},
+	OpPop:      {"OpPop", []int{}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte
