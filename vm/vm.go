@@ -54,6 +54,8 @@ func (vm *VM) Run() error {
 
 		case code.OpPop:
 			vm.pop()
+
+		case code.OpTrue, code.OpFalse:
 		}
 
 	}
