@@ -32,6 +32,10 @@ func TestIntegerArithmetic(t *testing.T) {
 	runCompilerTests(t, tests)
 }
 
+// =============================================================================
+// Helper Functions
+// =============================================================================
+
 func runCompilerTests(t *testing.T, tests []compilerTestCase) {
 	t.Helper()
 
