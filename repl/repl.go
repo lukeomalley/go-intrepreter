@@ -51,13 +51,6 @@ func Start(in io.Reader, out io.Writer) {
 		stackTop := machine.StackTop()
 		io.WriteString(out, stackTop.Inspect())
 		io.WriteString(out, "\n")
-
-		// evaluated := evaluator.Eval(program, env)
-		// if evaluated != nil {
-		// 	io.WriteString(out, evaluated.Inspect())
-		// 	io.WriteString(out, "\n")
-		// }
-
 	}
 }
 
