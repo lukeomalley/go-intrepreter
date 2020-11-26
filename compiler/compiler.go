@@ -8,11 +8,13 @@ import (
 	"github.com/lukeomalley/monkey_lang/object"
 )
 
+// Compiler structure used to store state of compiled code
 type Compiler struct {
 	instructions code.Instructions
 	constants    []object.Object
 }
 
+// New cnstructs a new compiler
 func New() *Compiler {
 	return &Compiler{
 		instructions: code.Instructions{},
@@ -20,11 +22,13 @@ func New() *Compiler {
 	}
 }
 
+// Bytecode output of compiler used by the VM
 type Bytecode struct {
 	Instructions code.Instructions
 	Constants    []object.Object
 }
 
+// Bytecode constructs a new bytecode object
 func (c *Compiler) Bytecode() *Bytecode {
 	return &Bytecode{
 		Instructions: c.instructions,
@@ -32,6 +36,7 @@ func (c *Compiler) Bytecode() *Bytecode {
 	}
 }
 
+// Compile traverses the AST and emits bytecode
 func (c *Compiler) Compile(node ast.Node) error {
 	switch node := node.(type) {
 	case *ast.Program:
@@ -59,9 +64,16 @@ func (c *Compiler) Compile(node ast.Node) error {
 		if err != nil {
 			return err
 		}
+
 		switch node.Operator {
 		case "+":
 			c.emit(code.OpAdd)
+		case "-":
+			c.emit(code.OpSub)
+		case "*":
+			c.emit(code.OpMul)
+		case "/":
+			c.emit(code.OpDiv)
 		default:
 			return fmt.Errorf("unknown operator %s", node.Operator)
 		}
