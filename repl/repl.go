@@ -11,8 +11,10 @@ import (
 	"github.com/lukeomalley/monkey_lang/vm"
 )
 
+// PROMPT is the prompt shown in the repl
 const PROMPT = "👉 "
 
+// Start iniaializes the repl
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 	// env := object.NewEnvironment()

@@ -1,6 +1,6 @@
 # 🐒 Monkey Lang
 
-Monkey Lang is a "toy" programming language built to help understand how an intrepreted language works under the hood. The intrepreter currently supports functions, higher-order functions, closures, strings, integers, arrays, hashes, and integer arithmetic.
+Monkey Lang is a "toy" programming language built to help understand how an programming languages work under the hood. The compiler currently supports functions, higher-order functions, closures, strings, integers, arrays, hashes, and integer arithmetic.
 
 This was written with the help of [Writing an Intrepreter in Go](https://interpreterbook.com/) by Thorsten Ball.
 
@@ -100,4 +100,4 @@ let reduce = fn(arr, initial, f) {
 
 ## 🛰 Status
 
-4.5: p 184 - Hashes (Lexing Hash Literals)
+Chapter 3: p 57 - Compiling Expressions
