@@ -71,6 +71,18 @@ func (vm *VM) Run() error {
 			if err != nil {
 				return err
 			}
+
+		case code.OpMinus:
+			err := vm.executeMinusOperator(op)
+			if err != nil {
+				return err
+			}
+
+		case code.OpBang:
+			err := vm.executeBangOperator(op)
+			if err != nil {
+				return err
+			}
 		}
 	}
 
@@ -80,6 +92,29 @@ func (vm *VM) Run() error {
 // =============================================================================
 // Helper Methods
 // =============================================================================
+
+func (vm *VM) executeMinusOperator(op code.Opcode) error {
+	operand := vm.pop()
+
+	if operand.Type() != object.INTEGER_OBJ {
+		return fmt.Errorf("unsupported type for negation: %s", operand.Type())
+	}
+
+	value := operand.(*object.Integer).Value
+	return vm.push(&object.Integer{Value: -value})
+}
+
+func (vm *VM) executeBangOperator(op code.Opcode) error {
+	operand := vm.pop()
+	switch operand {
+	case True:
+		return vm.push(False)
+	case False:
+		return vm.push(True)
+	default:
+		return vm.push(False)
+	}
+}
 
 func (vm *VM) executeBianryOperation(op code.Opcode) error {
 	// Pop two elements off the stack
