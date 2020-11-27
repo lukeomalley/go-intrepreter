@@ -34,6 +34,10 @@ func TestBooleanExpressions(t *testing.T) {
 	tests := []vmTestCase{
 		{"true", true},
 		{"false", false},
+		{"false == false", true},
+		{"1 > 2", false},
+		{"1 < 2", true},
+		{"true != true", false},
 	}
 
 	runVMTests(t, tests)
@@ -46,7 +50,7 @@ func TestBooleanExpressions(t *testing.T) {
 func runVMTests(t *testing.T, tests []vmTestCase) {
 	t.Helper()
 
-	for _, tt := range tests {
+	for i, tt := range tests {
 		program := parse(tt.input)
 		comp := compiler.New()
 		err := comp.Compile(program)
@@ -61,24 +65,24 @@ func runVMTests(t *testing.T, tests []vmTestCase) {
 		}
 
 		stackElem := vm.LastPoppedStackElem()
-		testExpectedObject(t, tt.expected, stackElem)
+		testExpectedObject(t, i, tt.expected, stackElem)
 	}
 }
 
-func testExpectedObject(t *testing.T, expected interface{}, actual object.Object) {
+func testExpectedObject(t *testing.T, testIndex int, expected interface{}, actual object.Object) {
 	t.Helper()
 
 	switch expected := expected.(type) {
 	case int:
 		err := testIntegerObject(int64(expected), actual)
 		if err != nil {
-			t.Errorf("testIntegerObject failed: %s", err)
+			t.Errorf("[index - %d] testIntegerObject failed: %s", testIndex, err)
 		}
 
 	case bool:
 		err := testBooleanObject(bool(expected), actual)
 		if err != nil {
-			t.Errorf("testBooleanObject failed: %s", err)
+			t.Errorf("[index - %d] testBooleanObject failed: %s", testIndex, err)
 		}
 	}
 }
