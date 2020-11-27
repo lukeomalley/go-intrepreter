@@ -25,6 +25,8 @@ const (
 	OpEqual
 	OpNotEqual
 	OpGreaterThan
+	OpMinus
+	OpBang
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -45,6 +47,8 @@ var definitions = map[Opcode]*Definition{
 	OpEqual:       {"OpFalse", []int{}},
 	OpNotEqual:    {"OpFalse", []int{}},
 	OpGreaterThan: {"OpFalse", []int{}},
+	OpMinus:       {"OpMinus", []int{}},
+	OpBang:        {"OpBang", []int{}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte
