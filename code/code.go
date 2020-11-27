@@ -6,12 +6,13 @@ import (
 	"fmt"
 )
 
+// Instructions is an alias for a byte slice of instructions
 type Instructions []byte
 
 // Opcode is an 8-bit encoding of an operation
 type Opcode byte
 
-// OpConstant encodes a constant
+// Enum for OpCodes
 const (
 	OpConstant = iota
 	OpAdd
@@ -21,6 +22,9 @@ const (
 	OpPop
 	OpTrue
 	OpFalse
+	OpEqual
+	OpNotEqual
+	OpGreaterThan
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -30,14 +34,17 @@ type Definition struct {
 }
 
 var definitions = map[Opcode]*Definition{
-	OpConstant: {"OpConstant", []int{2}},
-	OpPop:      {"OpPop", []int{}},
-	OpAdd:      {"OpAdd", []int{}},
-	OpSub:      {"OpSub", []int{}},
-	OpMul:      {"OpMul", []int{}},
-	OpDiv:      {"OpDiv", []int{}},
-	OpTrue:     {"OpTrue", []int{}},
-	OpFalse:    {"OpFalse", []int{}},
+	OpConstant:    {"OpConstant", []int{2}},
+	OpPop:         {"OpPop", []int{}},
+	OpAdd:         {"OpAdd", []int{}},
+	OpSub:         {"OpSub", []int{}},
+	OpMul:         {"OpMul", []int{}},
+	OpDiv:         {"OpDiv", []int{}},
+	OpTrue:        {"OpTrue", []int{}},
+	OpFalse:       {"OpFalse", []int{}},
+	OpEqual:       {"OpFalse", []int{}},
+	OpNotEqual:    {"OpFalse", []int{}},
+	OpGreaterThan: {"OpFalse", []int{}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte
