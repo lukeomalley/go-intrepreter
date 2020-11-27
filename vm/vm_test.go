@@ -36,6 +36,8 @@ func TestBooleanExpressions(t *testing.T) {
 		{"false", false},
 		{"false == false", true},
 		{"1 > 2", false},
+		{"1 == 2", false},
+		{"1 != 2", true},
 		{"1 < 2", true},
 		{"true != true", false},
 	}
