@@ -30,6 +30,8 @@ const (
 	OpJump
 	OpJumpNotTruthy
 	OpNull
+	OpSetGlobal
+	OpGetGlobal
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -55,6 +57,8 @@ var definitions = map[Opcode]*Definition{
 	OpJump:          {"OpJump", []int{2}},
 	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
 	OpNull:          {"OpNull", []int{}},
+	OpSetGlobal:     {"OpSetGlobal", []int{2}},
+	OpGetGlobal:     {"OpGetGlobal", []int{2}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte
