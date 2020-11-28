@@ -72,6 +72,15 @@ func (c *Compiler) Compile(node ast.Node) error {
 			}
 		}
 
+	case *ast.LetStatement:
+		err := c.Compile(node.Value)
+		if err != nil {
+			return err
+		}
+		// Assign a number that will take the place of that name.
+		// Store the mapping from the name to the number?
+		// emit the op code for setting
+
 	case *ast.InfixExpression:
 		// "Rewrite" code for less than to reduce instruction set
 		if node.Operator == "<" {
