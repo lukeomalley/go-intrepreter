@@ -20,13 +20,16 @@ var Null = &object.Null{}
 // StackSize sets the maximum size of the stack
 const StackSize = 2048
 
+// GlobalsSize sets the maximum size of the global variable store
+const GlobalsSize = 65536
+
 // VM takes bytecode instrutions and evaluates them
 type VM struct {
 	constants    []object.Object
 	instructions code.Instructions
-
-	stack []object.Object
-	sp    int // Always points to the next value, top of stack is (sp - 1)
+	globals      []object.Object
+	stack        []object.Object
+	sp           int // Always points to the next value, top of stack is (sp - 1)
 }
 
 // New constructs a VM
@@ -34,9 +37,17 @@ func New(bytecode *compiler.Bytecode) *VM {
 	return &VM{
 		instructions: bytecode.Instructions,
 		constants:    bytecode.Constants,
+		globals:      make([]object.Object, GlobalsSize),
 		stack:        make([]object.Object, StackSize),
 		sp:           0,
 	}
+}
+
+// NewWithGlobalsStore constructs a new VM with the globals from a previous instance of a VM
+func NewWithGlobalsStore(bytecode *compiler.Bytecode, globals []object.Object) *VM {
+	vm := New(bytecode)
+	vm.globals = globals
+	return vm
 }
 
 // Run executes the bytecode operations
@@ -100,7 +111,26 @@ func (vm *VM) Run() error {
 			if err != nil {
 				return err
 			}
+		case code.OpSetGlobal:
+			// Decode the index operand
+			globalIndex := code.ReadUint16(vm.instructions[ip+1:])
+			ip += 2
+
+			// Set the index in the globals slice to the value on the stack
+			vm.globals[globalIndex] = vm.pop()
+
+		case code.OpGetGlobal:
+			// Decode the index operand
+			globalIndex := code.ReadUint16(vm.instructions[ip+1:])
+			ip += 2
+
+			// Push the value onto the stack
+			err := vm.push(vm.globals[globalIndex])
+			if err != nil {
+				return err
+			}
 		}
+
 	}
 
 	return nil
