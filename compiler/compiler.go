@@ -134,27 +134,34 @@ func (c *Compiler) Compile(node ast.Node) error {
 			return fmt.Errorf("unknown prefix operator %s", node.Operator)
 		}
 	case *ast.IfExpression:
+
 		err := c.Compile(node.Condition)
 		if err != nil {
 			return err
 		}
 
-		jumpNotTruthyPos := c.emit(code.OpJumpNotTruthy, 9999) // 9999 is a dummy value that will be updated later
+		// Create a conditional jump with a dummy location and store the position to be updated later
+		jumpNotTruthyPos := c.emit(code.OpJumpNotTruthy, 9999) // 9999 is a dummy value
 
 		err = c.Compile(node.Consequence)
 		if err != nil {
 			return err
 		}
 
+		// Remove the additional pop is present
 		if c.lastInstructionIsPop() {
 			c.removeLastPop()
 		}
 
 		if node.Alternative == nil {
+			// Update the conditional jump location if no alternative
 			afterConsequencePos := len(c.instructions)
 			c.changeOperand(jumpNotTruthyPos, afterConsequencePos)
 		} else {
+			// Create a jump with a dummy location and store the position to be updated later
 			jumpPos := c.emit(code.OpJump, 9999) // 9999 is a dummy value that will be replaced later
+
+			// Update the conditional jump location to after the jump
 			afterConsequencePos := len(c.instructions)
 			c.changeOperand(jumpNotTruthyPos, afterConsequencePos)
 
@@ -163,10 +170,12 @@ func (c *Compiler) Compile(node ast.Node) error {
 				return err
 			}
 
+			// Remove any additional pops
 			if c.lastInstructionIsPop() {
 				c.removeLastPop()
 			}
 
+			// Update the location of the jump
 			afterAlternativePos := len(c.instructions)
 			c.changeOperand(jumpPos, afterAlternativePos)
 		}
