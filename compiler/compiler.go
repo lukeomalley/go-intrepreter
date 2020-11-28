@@ -34,6 +34,7 @@ type Compiler struct {
 	constants           []object.Object
 	lastInstruction     EmittedInstruction
 	previousInstruction EmittedInstruction
+	symbolTable         *SymbolTable
 }
 
 // New cnstructs a new compiler
@@ -43,6 +44,7 @@ func New() *Compiler {
 		constants:           []object.Object{},
 		lastInstruction:     EmittedInstruction{},
 		previousInstruction: EmittedInstruction{},
+		symbolTable:         NewSymbolTable(),
 	}
 }
 
@@ -77,9 +79,20 @@ func (c *Compiler) Compile(node ast.Node) error {
 		if err != nil {
 			return err
 		}
-		// Assign a number that will take the place of that name.
-		// Store the mapping from the name to the number?
+
+		// Define the name within the symbol table
+		symbol := c.symbolTable.Define(node.Name.Value)
+
 		// emit the op code for setting
+		c.emit(code.OpSetGlobal, symbol.Index)
+
+	case *ast.Identifier:
+		symbol, ok := c.symbolTable.Resolve(node.Value)
+		if !ok {
+			return fmt.Errorf("undefined variable: %s", symbol.Name)
+		}
+
+		c.emit(code.OpGetGlobal, symbol.Index)
 
 	case *ast.InfixExpression:
 		// "Rewrite" code for less than to reduce instruction set
