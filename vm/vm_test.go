@@ -58,6 +58,8 @@ func TestConditionals(t *testing.T) {
 		{input: "if (1 < 2) { 10 }", expected: 10},
 		{input: "if (1 < 2) { 10 } else { 20 }", expected: 10},
 		{input: "if (1 > 2) { 10 } else { 20 }", expected: 20},
+		{input: "if (false) { 10 }", expected: Null},
+		{input: "if (1 > 2) { 10 }", expected: Null},
 	}
 
 	runVMTests(t, tests)
@@ -103,6 +105,11 @@ func testExpectedObject(t *testing.T, testIndex int, expected interface{}, actua
 		err := testBooleanObject(bool(expected), actual)
 		if err != nil {
 			t.Errorf("[index - %d] testBooleanObject failed: %s", testIndex, err)
+		}
+
+	case *object.Null:
+		if actual != Null {
+			t.Errorf("object is not Null: %T (%+v)", actual, actual)
 		}
 	}
 }

@@ -8,11 +8,14 @@ import (
 	"github.com/lukeomalley/monkey_lang/object"
 )
 
-// True is the global true value used throughout the vm
+// True is the global true value referenced throughout the vm
 var True = &object.Boolean{Value: true}
 
-// False is the global false value used throughout the vm
+// False is the global false value referenced throughout the vm
 var False = &object.Boolean{Value: false}
+
+// Null is the global null value referenced through the vm
+var Null = &object.Null{}
 
 // StackSize sets the maximum size of the stack
 const StackSize = 2048

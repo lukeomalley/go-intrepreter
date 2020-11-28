@@ -29,6 +29,7 @@ const (
 	OpBang
 	OpJump
 	OpJumpNotTruthy
+	OpNull
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -53,6 +54,7 @@ var definitions = map[Opcode]*Definition{
 	OpBang:          {"OpBang", []int{}},
 	OpJump:          {"OpJump", []int{2}},
 	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
+	OpNull:          {"OpNull", []int{}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte

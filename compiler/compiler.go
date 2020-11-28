@@ -134,6 +134,17 @@ func (c *Compiler) Compile(node ast.Node) error {
 			return fmt.Errorf("unknown prefix operator %s", node.Operator)
 		}
 	case *ast.IfExpression:
+		/* Example w/ Bytecode:
+		if (true) { 10 } else { 20 }; 3333;
+			OpTrue
+			OpJumpNotTruthy [pos]
+			OpConstant        |
+			OpJump [pos]      |
+			OpConstant  <-----'
+			OpPop
+			OpConstant
+			OpPop
+		*/
 
 		err := c.Compile(node.Condition)
 		if err != nil {
@@ -153,18 +164,17 @@ func (c *Compiler) Compile(node ast.Node) error {
 			c.removeLastPop()
 		}
 
+		// Create a jump with a dummy location and store the position to be updated later
+		jumpPos := c.emit(code.OpJump, 9999)
+
+		// Update the conditional jump location to after the jump
+		afterConsequencePos := len(c.instructions)
+		c.changeOperand(jumpNotTruthyPos, afterConsequencePos)
+
 		if node.Alternative == nil {
-			// Update the conditional jump location if no alternative
-			afterConsequencePos := len(c.instructions)
-			c.changeOperand(jumpNotTruthyPos, afterConsequencePos)
+			// Fill the empty space with a null return value
+			c.emit(code.OpNull)
 		} else {
-			// Create a jump with a dummy location and store the position to be updated later
-			jumpPos := c.emit(code.OpJump, 9999) // 9999 is a dummy value that will be replaced later
-
-			// Update the conditional jump location to after the jump
-			afterConsequencePos := len(c.instructions)
-			c.changeOperand(jumpNotTruthyPos, afterConsequencePos)
-
 			err := c.Compile(node.Alternative)
 			if err != nil {
 				return err
@@ -174,11 +184,11 @@ func (c *Compiler) Compile(node ast.Node) error {
 			if c.lastInstructionIsPop() {
 				c.removeLastPop()
 			}
-
-			// Update the location of the jump
-			afterAlternativePos := len(c.instructions)
-			c.changeOperand(jumpPos, afterAlternativePos)
 		}
+
+		// Update the location of the jump to after the alternative
+		afterAlternativePos := len(c.instructions)
+		c.changeOperand(jumpPos, afterAlternativePos)
 
 	case *ast.IntegerLiteral:
 		// Create an integer object
