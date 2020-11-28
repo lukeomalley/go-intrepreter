@@ -186,6 +186,29 @@ func TestConditionals(t *testing.T) {
 				// 0012
 			},
 		},
+		{
+			input:             "if (true) { 10 } else { 20 }; 3333",
+			expectedConstants: []interface{}{10, 20, 3333},
+			expectedInstructions: []code.Instructions{
+				// 0000
+				code.Make(code.OpTrue), // 1 byte
+				// 0001
+				code.Make(code.OpJumpNotTruthy, 10), // 3 bytes
+				// 0004
+				code.Make(code.OpConstant, 0), // 4 bytes
+				// 0007
+				code.Make(code.OpJump, 13), // 3 byte
+				// 0010
+				code.Make(code.OpConstant, 1), // 3 bytes
+				// 0013
+				code.Make(code.OpPop), // 1 byte
+				// 0014
+				code.Make(code.OpConstant, 2), // 3 bytes
+				// 0017
+				code.Make(code.OpPop), // 1 byte
+				// 0018
+			},
+		},
 	}
 
 	runCompilerTests(t, tests)
