@@ -27,6 +27,8 @@ const (
 	OpGreaterThan
 	OpMinus
 	OpBang
+	OpJump
+	OpJumpNotTruthy
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -36,19 +38,21 @@ type Definition struct {
 }
 
 var definitions = map[Opcode]*Definition{
-	OpConstant:    {"OpConstant", []int{2}},
-	OpPop:         {"OpPop", []int{}},
-	OpAdd:         {"OpAdd", []int{}},
-	OpSub:         {"OpSub", []int{}},
-	OpMul:         {"OpMul", []int{}},
-	OpDiv:         {"OpDiv", []int{}},
-	OpTrue:        {"OpTrue", []int{}},
-	OpFalse:       {"OpFalse", []int{}},
-	OpEqual:       {"OpFalse", []int{}},
-	OpNotEqual:    {"OpFalse", []int{}},
-	OpGreaterThan: {"OpFalse", []int{}},
-	OpMinus:       {"OpMinus", []int{}},
-	OpBang:        {"OpBang", []int{}},
+	OpConstant:      {"OpConstant", []int{2}},
+	OpPop:           {"OpPop", []int{}},
+	OpAdd:           {"OpAdd", []int{}},
+	OpSub:           {"OpSub", []int{}},
+	OpMul:           {"OpMul", []int{}},
+	OpDiv:           {"OpDiv", []int{}},
+	OpTrue:          {"OpTrue", []int{}},
+	OpFalse:         {"OpFalse", []int{}},
+	OpEqual:         {"OpFalse", []int{}},
+	OpNotEqual:      {"OpFalse", []int{}},
+	OpGreaterThan:   {"OpFalse", []int{}},
+	OpMinus:         {"OpMinus", []int{}},
+	OpBang:          {"OpBang", []int{}},
+	OpJump:          {"OpJump", []int{2}},
+	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte
