@@ -100,4 +100,4 @@ let reduce = fn(arr, initial, f) {
 
 ## 🛰 Status
 
-Chapter 3: p 57 - Compiling Expressions
+Chapter 5: p 112 - Compiling Bindings
