@@ -129,6 +129,12 @@ func testExpectedObject(t *testing.T, testIndex int, expected interface{}, actua
 			t.Errorf("[index - %d] testBooleanObject failed: %s", testIndex, err)
 		}
 
+	case string:
+		err := testStringObject(expected, actual)
+		if err != nil {
+			t.Errorf("testStringObject failed: %s", err)
+		}
+
 	case *object.Null:
 		if actual != Null {
 			t.Errorf("object is not Null: %T (%+v)", actual, actual)
@@ -152,6 +158,19 @@ func testIntegerObject(expected int64, actual object.Object) error {
 	// Check that the result is the correct value
 	if result.Value != expected {
 		return fmt.Errorf("object has wrong value. got=%d, want=%d", result.Value, expected)
+	}
+
+	return nil
+}
+
+func testStringObject(expected string, actual object.Object) error {
+	result, ok := actual.(*object.String)
+	if !ok {
+		return fmt.Errorf("object is not String. got=%T (%t+v)", actual, actual)
+	}
+
+	if result.Value != expected {
+		return fmt.Errorf("object has wrong value. got=%q, want=%q", result.Value, expected)
 	}
 
 	return nil
