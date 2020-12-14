@@ -128,9 +128,21 @@ func (vm *VM) Run() error {
 			err := vm.push(vm.globals[globalIndex])
 			if err != nil {
 				return err
-			}
-		}
 
+			}
+		case code.OpArray:
+			numElements := int(code.ReadUint16(vm.instructions[ip+1:]))
+			ip += 2
+
+			array := vm.buildArray(vm.sp-numElements, vm.sp)
+			vm.sp = vm.sp - numElements
+
+			err := vm.push(array)
+			if err != nil {
+				return err
+			}
+
+		}
 	}
 
 	return nil
@@ -139,6 +151,16 @@ func (vm *VM) Run() error {
 // =============================================================================
 // Helper Methods
 // =============================================================================
+
+func (vm *VM) buildArray(startIndex, endIndex int) object.Object {
+	elements := make([]object.Object, endIndex-startIndex)
+
+	for i := startIndex; i < endIndex; i++ {
+		elements[i-startIndex] = vm.stack[i]
+	}
+
+	return &object.Array{Elements: elements}
+}
 
 func (vm *VM) executeMinusOperator(op code.Opcode) error {
 	operand := vm.pop()
