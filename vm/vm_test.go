@@ -87,6 +87,16 @@ func TestStringExpressions(t *testing.T) {
 	runVMTests(t, tests)
 }
 
+func TestArrayLiterals(t *testing.T) {
+	tests := []vmTestCase{
+		{input: "[]", expected: []int{}},
+		{input: "[1, 2, 3]", expected: []int{1, 2, 3}},
+		{input: "[1 + 2, 3 * 4, 5 + 6]", expected: []int{3, 12, 11}},
+	}
+
+	runVMTests(t, tests)
+}
+
 // =============================================================================
 // Helper Functions
 // =============================================================================
@@ -133,6 +143,25 @@ func testExpectedObject(t *testing.T, testIndex int, expected interface{}, actua
 		err := testStringObject(expected, actual)
 		if err != nil {
 			t.Errorf("testStringObject failed: %s", err)
+		}
+
+	case []int:
+		array, ok := actual.(*object.Array)
+		if !ok {
+			t.Errorf("object not Array, %T (%+v)", actual, actual)
+			return
+		}
+
+		if len(array.Elements) != len(expected) {
+			t.Errorf("wrong num of elements. want=%d, got=%d", len(expected), len(array.Elements))
+			return
+		}
+
+		for i, expectedElem := range expected {
+			err := testIntegerObject(int64(expectedElem), array.Elements[i])
+			if err != nil {
+				t.Errorf("testIntegerObject failed: %s", err)
+			}
 		}
 
 	case *object.Null:
