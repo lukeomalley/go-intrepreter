@@ -77,6 +77,16 @@ func TestGlobalLetStatements(t *testing.T) {
 	runVMTests(t, tests)
 }
 
+func TestStringExpressions(t *testing.T) {
+	tests := []vmTestCase{
+		{input: `"monkey"`, expected: "monkey"},
+		{input: `"mon" + "key"`, expected: "monkey"},
+		{input: `"mon" + "key" + "banana"`, expected: "monkeybanana"},
+	}
+
+	runVMTests(t, tests)
+}
+
 // =============================================================================
 // Helper Functions
 // =============================================================================
