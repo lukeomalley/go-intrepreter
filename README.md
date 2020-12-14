@@ -100,4 +100,4 @@ let reduce = fn(arr, initial, f) {
 
 ## 🛰 Status
 
-Chapter 5: p 112 - String, Array and Hash
+Chapter 5: Hash

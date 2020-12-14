@@ -130,6 +130,7 @@ func (vm *VM) Run() error {
 				return err
 
 			}
+
 		case code.OpArray:
 			numElements := int(code.ReadUint16(vm.instructions[ip+1:]))
 			ip += 2
