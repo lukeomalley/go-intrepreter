@@ -226,6 +226,9 @@ func (c *Compiler) Compile(node ast.Node) error {
 
 		// Append integer to the constants slice and emit the instruction
 		c.emit(code.OpConstant, c.addConstant(integer))
+	case *ast.StringLiteral:
+		str := &object.String{Value: node.Value}
+		c.emit(code.OpConstant, c.addConstant(str))
 
 	case *ast.Boolean:
 		if node.Value {
