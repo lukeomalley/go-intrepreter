@@ -21,7 +21,7 @@ const (
 	STRING_OBJ       = "STRING"
 	BUILTIN_OBJ      = "BUILTIN"
 	ARRAY_OBJ        = "ARRAY"
-	HASH_OBJECT      = "HASH"
+	HASH_OBJ         = "HASH"
 )
 
 type Object interface {
@@ -205,7 +205,7 @@ type Hash struct {
 	Pairs map[HashKey]HashPair
 }
 
-func (h *Hash) Type() ObjectType { return HASH_OBJECT }
+func (h *Hash) Type() ObjectType { return HASH_OBJ }
 func (h *Hash) Inspect() string {
 	var out bytes.Buffer
 
