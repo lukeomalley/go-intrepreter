@@ -106,7 +106,7 @@ func TestHashLiterals(t *testing.T) {
 		{
 			input: "{1: 2, 2: 3}",
 			expected: map[object.HashKey]int64{
-				(&object.Integer{Value: 2}).HashKey(): 2,
+				(&object.Integer{Value: 1}).HashKey(): 2,
 				(&object.Integer{Value: 2}).HashKey(): 3,
 			},
 		},
