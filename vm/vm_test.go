@@ -122,6 +122,22 @@ func TestHashLiterals(t *testing.T) {
 	runVMTests(t, tests)
 }
 
+func TestIndexExpressions(t *testing.T) {
+	tests := []vmTestCase{
+		{input: "[1, 2, 3][1]", expected: 2},
+		{input: "[1, 2, 3][0 + 2]", expected: 3},
+		{input: "[[1, 1, 1]][0][0]", expected: 1},
+		{input: "[][0]", expected: Null},
+		{input: "[1, 2, 9][99]", expected: Null},
+		{input: "{1: 1, 2: 2}[1]", expected: 1},
+		{input: "{1: 1, 2: 2}[2]", expected: 2},
+		{input: "{1: 1}[0]", expected: Null},
+		{input: "{}[0]", expected: Null},
+	}
+
+	runVMTests(t, tests)
+}
+
 // =============================================================================
 // Helper Functions
 // =============================================================================
