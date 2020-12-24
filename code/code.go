@@ -34,6 +34,7 @@ const (
 	OpGetGlobal
 	OpArray
 	OpHash
+	OpIndex
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -63,6 +64,7 @@ var definitions = map[Opcode]*Definition{
 	OpGetGlobal:     {"OpGetGlobal", []int{2}},
 	OpArray:         {"OpArray", []int{2}},
 	OpHash:          {"OpHash", []int{2}},
+	OpIndex:         {"OpIndex", []int{}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte
