@@ -456,8 +456,8 @@ func TestFunctions(t *testing.T) {
 		{
 			input: `fn() { 1;2 }`,
 			expectedConstants: []interface{}{
-				5,
-				10,
+				1,
+				2,
 				[]code.Instructions{
 					code.Make(code.OpConstant, 0),
 					code.Make(code.OpPop),
@@ -489,7 +489,6 @@ func TestCompilerScopes(t *testing.T) {
 	}
 
 	compiler.emit(code.OpSub)
-
 	if len(compiler.scopes[compiler.scopeIndex].instructions) != 1 {
 		t.Errorf("instructions length wrong. got=%d", len(compiler.scopes[compiler.scopeIndex].instructions))
 	}

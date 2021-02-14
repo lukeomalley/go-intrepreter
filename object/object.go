@@ -223,13 +223,17 @@ func (h *Hash) Inspect() string {
 	return out.String()
 }
 
+// CompiledFunction represents a function literal that has been compiled into bytecode instructions
 type CompiledFunction struct {
 	Instructions code.Instructions
 }
 
+// Type returnns the type of the compiled function
 func (cf *CompiledFunction) Type() ObjectType {
 	return COMPILED_FUNCTION_OBJ
 }
+
+// Inspect returns the compiled instructions
 func (cf *CompiledFunction) Inspect() string {
 	return fmt.Sprintf("CompiledFUnction[%p]", cf)
 }
