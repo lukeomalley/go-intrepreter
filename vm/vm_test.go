@@ -294,6 +294,27 @@ func TestCallingFunctionsWithBindings(t *testing.T) {
 	runVMTests(t, tests)
 }
 
+func TestCallingFunctionsWithArgumentsAndBindings(t *testing.T) {
+	tests := []vmTestCase{
+		{
+			input: `
+			  let identity = fn(a) { a; };
+				identity(4);
+			`,
+			expected: 4,
+		},
+		{
+			input: `
+			  let sum = fn(a, b) { a + b; };
+				sum(1, 2);
+			`,
+			expected: 3,
+		},
+	}
+
+	runVMTests(t, tests)
+}
+
 // =============================================================================
 // Helper Functions
 // =============================================================================
