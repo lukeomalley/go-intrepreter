@@ -225,8 +225,9 @@ func (h *Hash) Inspect() string {
 
 // CompiledFunction represents a function literal that has been compiled into bytecode instructions
 type CompiledFunction struct {
-	Instructions code.Instructions
-	NumLocals    int
+	Instructions  code.Instructions
+	NumLocals     int
+	NumParameters int
 }
 
 // Type returnns the type of the compiled function
