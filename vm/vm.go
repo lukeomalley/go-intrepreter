@@ -186,14 +186,15 @@ func (vm *VM) Run() error {
 			}
 
 		case code.OpCall:
-			fn, ok := vm.stack[vm.sp-1].(*object.CompiledFunction)
-			if !ok {
-				return fmt.Errorf("calling non-function")
-			}
+			vm.currentFrame().ip += 1
+			// fn, ok := vm.stack[vm.sp-1].(*object.CompiledFunction)
+			// if !ok {
+			// 	return fmt.Errorf("calling non-function")
+			// }
 
-			frame := NewFrame(fn, vm.sp)
-			vm.pushFrame(frame)
-			vm.sp = frame.basePointer + fn.NumLocals
+			// frame := NewFrame(fn, vm.sp)
+			// vm.pushFrame(frame)
+			// vm.sp = frame.basePointer + fn.NumLocals
 
 		case code.OpReturnValue:
 			returnValue := vm.pop()
