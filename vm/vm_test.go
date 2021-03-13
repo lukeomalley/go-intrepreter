@@ -337,13 +337,20 @@ func TestCallingFunctionsWithArgumentsAndBindings(t *testing.T) {
 		},
 		{
 			input: `
-			  let sum = fn(a, b) { 
-					let c = a + b; 
-					c;
-			  };
-				sum(1, 2) + sum(3, 4);
+			  let globalNum = 10;
+
+				let sum = fn(a, b) {
+					let c = a + b;
+					c + globalNum;
+				};
+
+				let outer = fn() {
+					return sum(1, 2) + sum(3, 4) + globalNum;
+				};
+
+				outer() + globalNum;
 			`,
-			expected: 10,
+			expected: 50,
 		},
 	}
 
