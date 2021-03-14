@@ -7,17 +7,17 @@ import (
 
 // Frame represents a call frame in the virtual machine
 type Frame struct {
-	fn          *object.CompiledFunction
+	cl          *object.Colsure
 	ip          int
 	basePointer int
 }
 
 // NewFrame constructs a new vm frame
-func NewFrame(fn *object.CompiledFunction, basePointer int) *Frame {
-	return &Frame{fn: fn, ip: -1, basePointer: basePointer}
+func NewFrame(cl *object.Colsure, basePointer int) *Frame {
+	return &Frame{cl: cl, ip: -1, basePointer: basePointer}
 }
 
 // Instructions returns the bytecode instructions for the function of a partirular vm frame
 func (f *Frame) Instructions() code.Instructions {
-	return f.fn.Instructions
+	return f.cl.Fn.Instructions
 }
