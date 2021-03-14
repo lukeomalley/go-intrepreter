@@ -42,6 +42,7 @@ const (
 	OpGetLocal
 	OpGetBuiltin
 	OpClosure
+	OpGetFree
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -79,6 +80,7 @@ var definitions = map[Opcode]*Definition{
 	OpGetLocal:      {"OpGetLocal", []int{1}},
 	OpGetBuiltin:    {"OpGetBuiltin", []int{1}},
 	OpClosure:       {"OpClosure", []int{2, 1}},
+	OpGetFree:       {"OpGetFree", []int{1}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte
