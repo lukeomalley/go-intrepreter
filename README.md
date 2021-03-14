@@ -100,4 +100,4 @@ let reduce = fn(arr, initial, f) {
 
 ## 🛰 Status
 
-Chapter 6: Functions
+Chapter 8: Built-In Functions (pg. 216)
