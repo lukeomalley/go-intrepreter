@@ -41,6 +41,7 @@ const (
 	OpSetLocal
 	OpGetLocal
 	OpGetBuiltin
+	OpClosure
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -77,6 +78,7 @@ var definitions = map[Opcode]*Definition{
 	OpSetLocal:      {"OpSetLocal", []int{1}},
 	OpGetLocal:      {"OpGetLocal", []int{1}},
 	OpGetBuiltin:    {"OpGetBuiltin", []int{1}},
+	OpClosure:       {"OpClosure", []int{2, 1}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte
@@ -184,6 +186,8 @@ func (ins Instructions) fmtInstruction(def *Definition, operands []int) string {
 		return def.Name
 	case 1:
 		return fmt.Sprintf("%s %d", def.Name, operands[0])
+	case 2:
+		return fmt.Sprintf("%s %d %d", def.Name, operands[0], operands[1])
 	}
 
 	return fmt.Sprintf("Error: unhandled operand count for %s\n", def.Name)

@@ -24,6 +24,7 @@ const (
 	ARRAY_OBJ             = "ARRAY"
 	HASH_OBJ              = "HASH"
 	COMPILED_FUNCTION_OBJ = "COMPILED_FUNCTION_OBJ"
+	COLSURE_OBJ           = "COLSURE_OBJ"
 )
 
 type Object interface {
@@ -223,6 +224,10 @@ func (h *Hash) Inspect() string {
 	return out.String()
 }
 
+// ============================================================================
+// Compiled Function
+// ============================================================================
+
 // CompiledFunction represents a function literal that has been compiled into bytecode instructions
 type CompiledFunction struct {
 	Instructions  code.Instructions
@@ -238,4 +243,19 @@ func (cf *CompiledFunction) Type() ObjectType {
 // Inspect returns the compiled instructions
 func (cf *CompiledFunction) Inspect() string {
 	return fmt.Sprintf("CompiledFUnction[%p]", cf)
+}
+
+// ============================================================================
+// Closure
+// ============================================================================
+
+type Colsure struct {
+	Fn   *CompiledFunction
+	Free []Object
+}
+
+func (c *Colsure) Type() ObjectType { return COLSURE_OBJ }
+
+func (c *Colsure) Inspect() string {
+	return fmt.Sprintf("Closure[%p]", c)
 }
