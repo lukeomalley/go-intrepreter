@@ -5,8 +5,9 @@ type SymbolScope string
 
 // Enum of possible symbol scopes
 const (
-	GlobalScope SymbolScope = "GLOBAL"
-	LocalScope  SymbolScope = "LOCAL"
+	GlobalScope  SymbolScope = "GLOBAL"
+	LocalScope   SymbolScope = "LOCAL"
+	BuiltinScope SymbolScope = "BUILTIN"
 )
 
 // Symbol represents an identifier in the users program
@@ -62,4 +63,10 @@ func (s *SymbolTable) Resolve(name string) (Symbol, bool) {
 	}
 
 	return obj, ok
+}
+
+func (s *SymbolTable) DefineBuiltin(index int, name string) Symbol {
+	symbol := Symbol{Name: name, Index: index, Scope: BuiltinScope}
+	s.store[name] = symbol
+	return symbol
 }
