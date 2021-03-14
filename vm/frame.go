@@ -7,13 +7,13 @@ import (
 
 // Frame represents a call frame in the virtual machine
 type Frame struct {
-	cl          *object.Colsure
+	cl          *object.Closure
 	ip          int
 	basePointer int
 }
 
 // NewFrame constructs a new vm frame
-func NewFrame(cl *object.Colsure, basePointer int) *Frame {
+func NewFrame(cl *object.Closure, basePointer int) *Frame {
 	return &Frame{cl: cl, ip: -1, basePointer: basePointer}
 }
 

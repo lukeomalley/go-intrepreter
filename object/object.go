@@ -249,13 +249,13 @@ func (cf *CompiledFunction) Inspect() string {
 // Closure
 // ============================================================================
 
-type Colsure struct {
+type Closure struct {
 	Fn   *CompiledFunction
 	Free []Object
 }
 
-func (c *Colsure) Type() ObjectType { return COLSURE_OBJ }
+func (c *Closure) Type() ObjectType { return COLSURE_OBJ }
 
-func (c *Colsure) Inspect() string {
+func (c *Closure) Inspect() string {
 	return fmt.Sprintf("Closure[%p]", c)
 }
