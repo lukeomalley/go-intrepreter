@@ -488,6 +488,19 @@ func TestClosures(t *testing.T) {
 			`,
 			expected: 14,
 		},
+		{
+			input: `
+			  let newClosure = fn (a, b) {
+					let one = fn() { a; };
+					let two = fn() { b; };
+					fn() { one() + two(); };
+				};
+
+				let closure = newClosure(9, 90);
+				closure();
+			`,
+			expected: 99,
+		},
 	}
 
 	runVMTests(t, tests)
