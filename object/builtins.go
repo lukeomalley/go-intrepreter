@@ -22,7 +22,7 @@ var Builtins = []struct {
 					return &Integer{Value: int64(len(arg.Value))}
 
 				default:
-					return newError("argument to 'len' not supported, got=%s", args[0].Type())
+					return newError("argument to `len` not supported. got=%s", args[0].Type())
 				}
 			},
 		},
@@ -50,7 +50,7 @@ var Builtins = []struct {
 				}
 
 				if args[0].Type() != ARRAY_OBJ {
-					return newError("argument to `first` must be ARRAY. got=%s", args[0].Type())
+					return newError("argument to `first` must be an ARRAY. got=%s", args[0].Type())
 				}
 
 				arr := args[0].(*Array)
@@ -73,7 +73,7 @@ var Builtins = []struct {
 				}
 
 				if args[0].Type() != ARRAY_OBJ {
-					return newError("argument to `first` must be ARRAY. got=%s", args[0].Type())
+					return newError("argument to `last` must be an ARRAY. got=%s", args[0].Type())
 				}
 
 				arr := args[0].(*Array)
@@ -96,7 +96,7 @@ var Builtins = []struct {
 				}
 
 				if args[0].Type() != ARRAY_OBJ {
-					return newError("argument to `first` must be ARRAY. got=%s", args[0].Type())
+					return newError("argument to `first` must be an ARRAY. got=%s", args[0].Type())
 				}
 
 				arr := args[0].(*Array)
@@ -121,7 +121,7 @@ var Builtins = []struct {
 				}
 
 				if args[0].Type() != ARRAY_OBJ {
-					return newError("argument to `first` must be ARRAY. got=%s", args[0].Type())
+					return newError("argument to `push` must be an ARRAY. got=%s", args[0].Type())
 				}
 
 				arr := args[0].(*Array)
