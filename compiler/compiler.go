@@ -100,13 +100,13 @@ func (c *Compiler) Compile(node ast.Node) error {
 		}
 
 	case *ast.LetStatement:
+		// Define the name within the symbol table
+		symbol := c.symbolTable.Define(node.Name.Value)
+
 		err := c.Compile(node.Value)
 		if err != nil {
 			return err
 		}
-
-		// Define the name within the symbol table
-		symbol := c.symbolTable.Define(node.Name.Value)
 
 		if symbol.Scope == GlobalScope {
 			c.emit(code.OpSetGlobal, symbol.Index)
