@@ -18,11 +18,15 @@ const PROMPT = "👉 "
 // Start iniaializes the repl
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
-	// env := object.NewEnvironment()
 
 	constants := []object.Object{}
 	globals := make([]object.Object, vm.GlobalsSize)
 	symbolTable := compiler.NewSymbolTable()
+
+	// Add builtin functions to REPL env
+	for i, v := range object.Builtins {
+		symbolTable.DefineBuiltin(i, v.Name)
+	}
 
 	for {
 		fmt.Printf(PROMPT)
