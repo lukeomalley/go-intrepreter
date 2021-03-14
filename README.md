@@ -88,16 +88,6 @@ let reduce = fn(arr, initial, f) {
 };
 ```
 
-## 🛠 How it Works
-
-### Lexing
-
-### Parsing
-
-### Evaluating
-
-### Repl
-
 ## 🛰 Status
 
-Chapter 8: Built-In Functions (pg. 216)
+Chapter 9: Closures (pg. 233)
