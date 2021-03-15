@@ -87,7 +87,3 @@ let reduce = fn(arr, initial, f) {
   iter(arr, initial);
 };
 ```
-
-## 🛰 Status
-
-Chapter 9: Closures (pg. 233)
