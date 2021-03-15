@@ -5,10 +5,11 @@ type SymbolScope string
 
 // Enum of possible symbol scopes
 const (
-	GlobalScope  SymbolScope = "GLOBAL"
-	LocalScope   SymbolScope = "LOCAL"
-	BuiltinScope SymbolScope = "BUILTIN"
-	FreeScope    SymbolScope = "FREE"
+	GlobalScope   SymbolScope = "GLOBAL"
+	LocalScope    SymbolScope = "LOCAL"
+	BuiltinScope  SymbolScope = "BUILTIN"
+	FreeScope     SymbolScope = "FREE"
+	FunctionScope SymbolScope = "FUNCTION"
 )
 
 // Symbol represents an identifier in the users program
@@ -88,5 +89,11 @@ func (s *SymbolTable) defineFree(original Symbol) Symbol {
 	symbol.Scope = FreeScope // TODO: Why cant this be done in one line?
 
 	s.store[original.Name] = symbol
+	return symbol
+}
+
+func (s *SymbolTable) DefineFunctionName(name string) Symbol {
+	symbol := Symbol{Name: name, Scope: FunctionScope, Index: 0}
+	s.store[name] = symbol
 	return symbol
 }
