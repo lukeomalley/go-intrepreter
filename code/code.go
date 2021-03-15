@@ -43,6 +43,7 @@ const (
 	OpGetBuiltin
 	OpClosure
 	OpGetFree
+	OpCurrentClosure
 )
 
 // Definition of the Opcodes used within the virtual stack machine
@@ -52,35 +53,36 @@ type Definition struct {
 }
 
 var definitions = map[Opcode]*Definition{
-	OpConstant:      {"OpConstant", []int{2}},
-	OpPop:           {"OpPop", []int{}},
-	OpAdd:           {"OpAdd", []int{}},
-	OpSub:           {"OpSub", []int{}},
-	OpMul:           {"OpMul", []int{}},
-	OpDiv:           {"OpDiv", []int{}},
-	OpTrue:          {"OpTrue", []int{}},
-	OpFalse:         {"OpFalse", []int{}},
-	OpEqual:         {"OpFalse", []int{}},
-	OpNotEqual:      {"OpFalse", []int{}},
-	OpGreaterThan:   {"OpFalse", []int{}},
-	OpMinus:         {"OpMinus", []int{}},
-	OpBang:          {"OpBang", []int{}},
-	OpJump:          {"OpJump", []int{2}},
-	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
-	OpNull:          {"OpNull", []int{}},
-	OpSetGlobal:     {"OpSetGlobal", []int{2}},
-	OpGetGlobal:     {"OpGetGlobal", []int{2}},
-	OpArray:         {"OpArray", []int{2}},
-	OpHash:          {"OpHash", []int{2}},
-	OpIndex:         {"OpIndex", []int{}},
-	OpCall:          {"OpCall", []int{1}},
-	OpReturnValue:   {"OpReturnValue", []int{}},
-	OpReturn:        {"OpReturn", []int{}},
-	OpSetLocal:      {"OpSetLocal", []int{1}},
-	OpGetLocal:      {"OpGetLocal", []int{1}},
-	OpGetBuiltin:    {"OpGetBuiltin", []int{1}},
-	OpClosure:       {"OpClosure", []int{2, 1}},
-	OpGetFree:       {"OpGetFree", []int{1}},
+	OpConstant:       {"OpConstant", []int{2}},
+	OpPop:            {"OpPop", []int{}},
+	OpAdd:            {"OpAdd", []int{}},
+	OpSub:            {"OpSub", []int{}},
+	OpMul:            {"OpMul", []int{}},
+	OpDiv:            {"OpDiv", []int{}},
+	OpTrue:           {"OpTrue", []int{}},
+	OpFalse:          {"OpFalse", []int{}},
+	OpEqual:          {"OpFalse", []int{}},
+	OpNotEqual:       {"OpFalse", []int{}},
+	OpGreaterThan:    {"OpFalse", []int{}},
+	OpMinus:          {"OpMinus", []int{}},
+	OpBang:           {"OpBang", []int{}},
+	OpJump:           {"OpJump", []int{2}},
+	OpJumpNotTruthy:  {"OpJumpNotTruthy", []int{2}},
+	OpNull:           {"OpNull", []int{}},
+	OpSetGlobal:      {"OpSetGlobal", []int{2}},
+	OpGetGlobal:      {"OpGetGlobal", []int{2}},
+	OpArray:          {"OpArray", []int{2}},
+	OpHash:           {"OpHash", []int{2}},
+	OpIndex:          {"OpIndex", []int{}},
+	OpCall:           {"OpCall", []int{1}},
+	OpReturnValue:    {"OpReturnValue", []int{}},
+	OpReturn:         {"OpReturn", []int{}},
+	OpSetLocal:       {"OpSetLocal", []int{1}},
+	OpGetLocal:       {"OpGetLocal", []int{1}},
+	OpGetBuiltin:     {"OpGetBuiltin", []int{1}},
+	OpClosure:        {"OpClosure", []int{2, 1}},
+	OpGetFree:        {"OpGetFree", []int{1}},
+	OpCurrentClosure: {"OpCurrentClosure", []int{}},
 }
 
 // Lookup returns the corresponding Opcode for a given byte
